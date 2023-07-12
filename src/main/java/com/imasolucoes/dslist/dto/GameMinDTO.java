@@ -2,6 +2,7 @@ package com.imasolucoes.dslist.dto;
 
 
 import com.imasolucoes.dslist.entities.Game;
+import com.imasolucoes.dslist.projections.GameMinProjection;
 
 
 public class GameMinDTO {
@@ -29,6 +30,15 @@ public class GameMinDTO {
         this.year = game.getYear();
         this.imgUrl = game.getImgUrl();
         this.shortDescription = game.getShortDescription();
+    }
+
+    public GameMinDTO( GameMinProjection gameMinProjection ) {
+
+        this.id = gameMinProjection.getId();
+        this.title = gameMinProjection.getTitle();
+        this.year = gameMinProjection.getYear();
+        this.imgUrl = gameMinProjection.getImgUrl();
+        this.shortDescription = gameMinProjection.getShortDescription();
     }
 
     // --

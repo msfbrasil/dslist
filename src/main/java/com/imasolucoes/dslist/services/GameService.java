@@ -4,6 +4,7 @@ package com.imasolucoes.dslist.services;
 import com.imasolucoes.dslist.dto.GameDTO;
 import com.imasolucoes.dslist.dto.GameMinDTO;
 import com.imasolucoes.dslist.entities.Game;
+import com.imasolucoes.dslist.projections.GameMinProjection;
 import com.imasolucoes.dslist.repositories.GameRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,13 @@ public class GameService {
         List< Game > gameList = this.gameRepository.findAll();
 
         return gameList.stream().map( current -> new GameMinDTO( current ) ).collect( Collectors.toList() );
+    }
+
+    @Transactional( readOnly = true )
+    public List< GameMinDTO > findByList( Long listId ) {
+
+        List< GameMinProjection > gameMinProjectionList = this.gameRepository.searchByList( listId );
+
+        return gameMinProjectionList.stream().map( current -> new GameMinDTO( current ) ).collect( Collectors.toList() );
     }
 }
